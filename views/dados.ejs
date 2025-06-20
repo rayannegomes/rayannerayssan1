@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main class="main-content-wrapper">
+        <h2 class="main-content-wrapper__title"><%= title %></h2>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <p class="message--error"><%= error %></p>
+        <% } %>
+
+        <div class="home-buttons-container" style="justify-content: flex-start;">
+            <a href="/atendimentos/cadastro" class="btn-action btn-action--add">Cadastrar Novo Atendimento</a>
+        </div>
+
+        <% if (atendimentos && atendimentos.length > 0) { %>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% atendimentos.forEach(function(atendimento) { %>
+                        <tr>
+                            <td><%= atendimento.id %></td>
+                            <td><%= atendimento.nome %></td>
+                            <td><%= atendimento.email %></td>
+                            <td><%= atendimento.telefone %></td>
+                            <td><%= atendimento.dataAtendimento %></td>
+                            <td><%= atendimento.horaAtendimento %></td>
+                            <td><%= atendimento.descricao %></td>
+                            <td>
+                                <a href="/atendimentos/editar/<%= atendimento.id %>" class="btn-action btn-action--edit btn-action--small">Editar</a>
+                                <form action="/atendimentos/excluir/<%= atendimento.id %>" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn-action btn-action--delete btn-action--small" onclick="return confirm('Tem certeza que deseja excluir este atendimento?')">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>Nenhum atendimento cadastrado ainda.</p>
+        <% } %>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>

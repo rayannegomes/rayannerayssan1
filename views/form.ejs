@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main class="main-content-wrapper">
+        <h2 class="main-content-wrapper__title"><%= title %></h2>
+
+        <form action="/atendimentos/salvar" method="POST" class="app-form">
+            <input type="hidden" name="id" value="<%= atendimento ? atendimento.id : '' %>">
+
+            <div class="form__field-group">
+                <label for="nome" class="form__label">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" value="<%= atendimento ? atendimento.nome : '' %>" required class="form__input">
+            </div>
+
+            <div class="form__field-group">
+                <label for="email" class="form__label">E-mail:</label>
+                <input type="email" id="email" name="email" value="<%= atendimento ? atendimento.email : '' %>" required class="form__input">
+            </div>
+
+            <div class="form__field-group">
+                <label for="telefone" class="form__label">Telefone:</label>
+                <input type="tel"    id="telefone"
+                       name="telefone"
+                       value="<%= atendimento ? atendimento.telefone : '' %>"
+                       class="form__input"
+                       pattern="[0-9]{2}[0-9]{5}[0-9]{4}|[0-9]{2}[0-9]{5}[0-9]{4}|[0-9]{2}[0-9]{4}[0-9]{4}"  placeholder="Apenas numeros"> </div>
+
+            <div class="form__field-group">
+                <label for="dataAtendimento" class="form__label">Data do Atendimento:</label>
+                <input type="date" id="dataAtendimento" name="dataAtendimento" value="<%= atendimento ? atendimento.dataAtendimento : '' %>" required class="form__input">
+            </div>
+
+            <div class="form__field-group">
+                <label for="horaAtendimento" class="form__label">Hora do Atendimento:</label>
+                <input type="time" id="horaAtendimento" name="horaAtendimento" value="<%= atendimento ? atendimento.horaAtendimento : '' %>" required class="form__input">
+            </div>
+
+            <div class="form__field-group">
+                <label for="descricao" class="form__label">Descrição do Atendimento:</label>
+                <textarea id="descricao" name="descricao" rows="4" cols="50" class="form__textarea"><%= atendimento ? atendimento.descricao : '' %></textarea>
+            </div>
+
+            <div class="form__buttons-container">
+                <button type="submit" class="btn-action btn-action--save">Salvar Atendimento</button>
+                <a href="/atendimentos" class="btn-action btn-action--cancel">Cancelar</a>
+            </div>
+        </form>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>

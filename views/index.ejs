@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main class="main-content-wrapper">
+        <h2 class="main-content-wrapper__title"><%= title %></h2>
+        <p>Bem-vindo ao sistema de gerenciamento de atendimentos. <br> Aqui você pode cadastrar, visualizar, editar e excluir informações de contato e descrições de atendimento.</p>
+
+        <div class="home-buttons-container">
+            <a href="/atendimentos/cadastro" class="btn-action btn-action--add">Cadastrar Novo Atendimento</a>
+            <a href="/atendimentos" class="btn-action btn-action--view">Ver Atendimentos Cadastrados</a>
+        </div>
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>

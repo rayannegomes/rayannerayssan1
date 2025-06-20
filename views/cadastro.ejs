@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('./partials/header') %>
+    <main>
+        <h2><%= title %></h2>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+
+        <a href="/cadastro/form">Cadastrar Atendimento</a>
+
+        <% if (itens && itens.length > 0) { %>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% itens.forEach(function(item) { %>
+                        <tr>
+                            <td><%= item.id %></td>
+                            <td><%= item.email %></td>
+                            <td><%= item.telefone %></td>
+                            <td><%= item.nome %></td>
+                            <td><%= item.descricao %></td>
+                            <td>
+                                <a href="/cadastro/form/<%= item.id %>">Editar</a>
+                                <form action="/cadastro/excluir/<%= item.id %>" method="POST" style="display:inline;">
+                                    <button type="submit" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p>Nenhum item cadastrado ainda.</p>
+        <% } %>
+    </main>
+    <%- include('./partials/footer') %>
+</body>
+</html>
